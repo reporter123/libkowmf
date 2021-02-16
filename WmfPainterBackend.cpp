@@ -437,7 +437,7 @@ void WmfPainterBackend::setMatrix(WmfDeviceContext &context, const QMatrix &wm, 
 #if DEBUG_WMFPAINT
     qDebug(kowmf) << wm << " " << combine;
 #endif
-    mPainter->setMatrix(wm, combine);
+    mPainter->setTransform(QTransform(wm), combine);
 
     recalculateWorldTransform();
 }
@@ -499,7 +499,7 @@ void WmfPainterBackend::drawRoundRect(WmfDeviceContext &context, int x, int y, i
 #endif
 
     updateFromDeviceContext(context);
-    mPainter->drawRoundRect(x, y, w, h, roudw, roudh);
+    mPainter->drawRoundedRect(x, y, w, h, roudw, roudh, Qt::AbsoluteSize);
 }
 
 
@@ -668,7 +668,7 @@ void WmfPainterBackend::drawText(WmfDeviceContext &context, int x, int y, const 
     }
 
     QFontMetrics  fm(mPainter->font(), mTarget);
-    int width  = fm.width(text) + fm.descent();    // fm.width(text) isn't right with Italic text
+    int width  = fm.horizontalAdvance(text) + fm.descent();    // fm.horizontalAdvance(text) isn't right with Italic text
     int height = fm.height();
 
     // Horizontal align.  These flags are supposed to be mutually exclusive.

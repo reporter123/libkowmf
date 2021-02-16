@@ -20,8 +20,7 @@
 #ifndef LIBWMF_EXPORT_H
 #define LIBWMF_EXPORT_H
 
-/* needed for KDE_EXPORT and KDE_IMPORT macros */
-#include <kdemacros.h>
+#include <QtGlobal>
 
 /* We use _WIN32/_WIN64 instead of Q_OS_WIN so that this header can be used from C files too */
 #if defined _WIN32 || defined _WIN64
@@ -29,16 +28,16 @@
 #ifndef LIBWMF_EXPORT
 # if defined(MAKE_LIBWMF_LIB)
 /* We are building this library */
-#  define LIBWMF_EXPORT KDE_EXPORT
+#  define LIBWMF_EXPORT Q_DECL_EXPORT
 # else
 /* We are using this library */
-#  define LIBWMF_EXPORT KDE_IMPORT
+#  define LIBWMF_EXPORT Q_DECL_IMPORT
 # endif
 #endif
 
 #else /* UNIX */
 
-#define LIBWMF_EXPORT KDE_EXPORT
+#define LIBWMF_EXPORT Q_DECL_EXPORT
 
 #endif
 
