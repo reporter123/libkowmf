@@ -57,6 +57,10 @@ WmfPainterBackend::~WmfPainterBackend()
 #if 0
 bool WmfPainterBackend::play(QPaintDevice& target)
 {
+    // If there is already a painter and it's owned by us, then delete it.
+    if (mPainter && mIsInternalPainter)
+        delete mPainter;
+
     if (!mPainter)
         mPainter = new QPainter(&target);
     mIsInternalPainter = true;
@@ -77,9 +81,9 @@ bool WmfPainterBackend::play(QPaintDevice& target)
 
 bool WmfPainterBackend::play()
 {
-    // If there is already a painter and it's owned by us, then delete it.
-    if (mPainter && mIsInternalPainter)
-        delete mPainter;
+    //Bail. This function cann't handle a non existant painter.
+    if(!mPainter)
+        return false;
 
     mTarget = mPainter->device();
 
