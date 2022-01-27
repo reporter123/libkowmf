@@ -240,7 +240,8 @@ bool WmfParser::load(const QByteArray& array)
     mBBoxBottom = -32768;
     mMaxWidth = 0;
     mMaxHeight = 0;
-
+    header.headerSize = 0;
+    eheader.size = 0;
 #if DEBUG_RECORDS
     qDebug(kowmf) << "--------------------------- Starting parsing WMF ---------------------------";
 #endif
