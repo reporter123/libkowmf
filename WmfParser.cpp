@@ -1257,7 +1257,7 @@ bool WmfParser::play(WmfAbstractBackend* backend)
                break;
             default:
                 // function outside WMF specification
-                qCCritical(kowmf) << "BROKEN WMF file: Record number" << hex << recordType << dec
+                qCCritical(kowmf) << "BROKEN WMF file: Record number" << Qt::hex << recordType << Qt::dec
                               << " index " << index;
                 mValid = false;
                 break;
